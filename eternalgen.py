@@ -1,4 +1,4 @@
-"""Eternal generator returns  - 1"""
+"""Eternal generator returns: 1"""
 
 
 def eternal_gen():
