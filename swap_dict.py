@@ -1,3 +1,8 @@
+"""
+ swap function
+"""
+
+
 def swap(dictionary):
     """a function that takes a dictionary as input and returns
     a dictionary in which keys with values are swapped

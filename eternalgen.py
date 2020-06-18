@@ -1,7 +1,11 @@
-"""Eternal generator returns: 1"""
+"""Eternal generator"""
 
 
 def eternal_gen():
+    """
+    Eternal generator
+    :return:  1
+    """
     while True:
         yield 1
 

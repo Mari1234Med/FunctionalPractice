@@ -2,6 +2,12 @@
 
 
 def xrange(*args):
+    """
+    Generates a list of numbers between the given start
+    integer to the stop integer
+    :param args:
+    :return:
+    """
     start, stop, step = 0, 0, 0
     if len(args) == 1:
         start = 0

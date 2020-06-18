@@ -2,13 +2,19 @@
 
 
 def my_zip(*args):
+    """
+    function takes iterables (can be zero or more), aggregates them in a tuple,
+     and return it
+    :param args:
+    :return:  ierator of typle
+    """
     if args == ():
         return
     list_iter = sorted(args, key=len)
     for i in range(len(list_iter[0])):
         zip_list = []
-        for j in range(len(args)):
-            zip_list.append(args[j][i])
+        for cur_list in args:
+            zip_list.append(cur_list[i])
         yield tuple(zip_list)
 
 
