@@ -3,12 +3,12 @@
 
 def squared(numberlist):
     """Returns - list of squared numbers"""
-    return [x ** 2 for x in numberlist]
+    return (x ** 2 for x in numberlist)
 
 
 def second_elem(numlist):
     """Returns - every second list item"""
-    return (numlist[i] for i in range(len(numlist)) if i % 2 == 0)
+    return (numlist[i] for i in range(len(numlist)) if i % 2 != 0)
 
 
 def even_in_odd(numlist):
