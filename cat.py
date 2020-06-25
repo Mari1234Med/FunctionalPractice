@@ -11,8 +11,6 @@ Usage: %s [OPTION]... [FILE]..
 import sys
 import argparse
 
-counter_nonempty = 0
-
 
 def create_parser():
     """
@@ -45,24 +43,27 @@ def new_cat():
     for name_file in args.files:
         try:
             with open(name_file, 'r') as file:
-                global counter_nonempty
-                counter_nonempty = 0
+                count_nonempty = 0
                 lines = file.readlines()
                 for i, line in enumerate(lines):
-                    lines[i] = line_change(i, line, args)
+                    lines[i], count_nonempty = line_change(i, count_nonempty,
+                                                           line, args)
                     print(lines[i])
 
         except FileNotFoundError:
             print("No such file or directory:", name_file)
 
 
-def line_change(i, string, args):
+def line_change(i, counter, string, args):
     """
     Change the line according to the flags raised
     :param i: string number
     :param string: current string
     :param args: flags
+    :param counter: counter nonempty line
     :return:
+     string: Modified line
+     counter: new value of counter
     """
     if args.show_all:
         args.show_ends = True
@@ -75,14 +76,13 @@ def line_change(i, string, args):
         string = str(i + 1) + ' ' + string
     if args.number_nonblank:
         if string.strip():
-            global counter_nonempty
-            counter_nonempty += 1
-            string = str(counter_nonempty) + ' ' + string
+            counter += 1
+            string = str(counter) + ' ' + string
     if args.show_tabs:
         while string.find('\t') >= 0:
             index = string.find('\t')
             string = string[:index] + '^I' + string[index + 1:]
-    return string
+    return string, counter
 
 
 def cat(*args):
