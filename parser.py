@@ -2,23 +2,7 @@
 import re
 import collections
 
-
-def read_find(file_name, find_func):
-    """
-    Opens logfile and runs find_func for read data
-    :param file_name: name of logfile
-           find_func: regular expression search function
-    :return:  list
-
-    """
-    try:
-        with open(file_name, 'r') as f:
-            data = f.read()
-            return find_func(data)
-
-    except FileNotFoundError:
-        print("No such file or directory:", file_name)
-        return []
+FILE_NAME = 'access_log.log'
 
 
 def find_most_requests(data):
@@ -40,8 +24,28 @@ def find_popular_platforms(data):
     :param data:
     :return: list
     """
-    pass
+    reg = r'((Linux|Windows|Macintosh|Unix|iPhone OS).*?)(?=\))'
+    list_group = re.findall(reg, data)
+    list_os = [item[0] for item in list_group]
+    counter_ip = collections.Counter(list_os)
+    return counter_ip.most_common(5)
+
+
+def main():
+    """
+    Opens logfile, runs and print find_most_requests() and
+    find_popular_platforms()
+     :return:
+
+    """
+    try:
+        with open(FILE_NAME, 'r') as f:
+            data = f.read()
+            print(find_most_requests(data))
+            print(find_popular_platforms(data))
+    except FileNotFoundError:
+        print("No such file or directory:", FILE_NAME)
 
 
 if __name__ == '__main__':
-    print(read_find('access_log.log', find_most_requests))
+    main()
