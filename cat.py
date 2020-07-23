@@ -38,7 +38,6 @@ def new_cat():
 
     :return:
     """
-
     args = create_parser()
     for name_file in args.files:
         try:
